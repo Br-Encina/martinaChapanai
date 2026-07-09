@@ -3,7 +3,17 @@ guid: e1d0e682b6a3dd4448a1c59ba2b34138
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 7dff45f581ba0db41a59026852030166, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rojito
+    second: {fileID: 2100000, guid: 34f7968080cf77444b2a8925e17b32ed, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

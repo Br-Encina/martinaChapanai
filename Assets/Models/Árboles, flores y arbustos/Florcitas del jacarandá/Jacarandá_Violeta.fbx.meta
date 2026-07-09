@@ -3,7 +3,12 @@ guid: 94aa54d307aefe4409ec606b1030de65
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Violeta_
+    second: {fileID: 2100000, guid: 8dac719f33b899d4a9a2658d2ea50adb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

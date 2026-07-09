@@ -3,7 +3,12 @@ guid: b1aa12a2488b0194184af7105d5d0790
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gris_
+    second: {fileID: 2100000, guid: b9b3a22637c2f6b4cad2ba013065e1ed, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

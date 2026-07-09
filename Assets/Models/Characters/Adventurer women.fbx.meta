@@ -3,7 +3,52 @@ guid: 460b021b97a754049b3f43d247a947d4
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown
+    second: {fileID: 2100000, guid: bb91dd88b464e0948b0d69a08eac424f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown2
+    second: {fileID: 2100000, guid: a1b43680dcb8e174e9430ce9c50a87aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown_02
+    second: {fileID: 2100000, guid: e815d5e89d4d70f4c8f752a9267b3621, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gold
+    second: {fileID: 2100000, guid: df64720e251d2db488ff573208a138d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green
+    second: {fileID: 2100000, guid: 1a30dcf782d13d449ba1a28e08fce53a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair_Brown
+    second: {fileID: 2100000, guid: 7b6c52d0771c9fb41bdbaad996c868ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightGreen
+    second: {fileID: 2100000, guid: 174ff2fb6ef44f443aaf9a69e9180b06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 6f01f34aa064bec45a898c2707b5032b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: c2c1f8a79ac35eb4ab9c5c0ed6b0a988, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

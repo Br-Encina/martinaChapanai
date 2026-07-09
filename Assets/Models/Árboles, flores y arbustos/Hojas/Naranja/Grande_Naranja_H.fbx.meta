@@ -3,7 +3,17 @@ guid: 960fe17a133ea2d4ca209c8a529008a6
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 17b2e18f81098ec4baa3bb57058a4186, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Naranja oscuro_
+    second: {fileID: 2100000, guid: 0e7a27f2d7f24574db45164968995c40, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

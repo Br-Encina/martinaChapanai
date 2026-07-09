@@ -3,7 +3,12 @@ guid: 234d01f9052bb494ea6ddcfc793a58bf
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tronkito_
+    second: {fileID: 2100000, guid: 9002c9f2a3ff1f04fbd3176cec70bf31, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
