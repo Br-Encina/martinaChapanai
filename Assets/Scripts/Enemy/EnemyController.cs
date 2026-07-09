@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
     // ── Referencias ───────────────────────────────────────────────────────────
     Transform playerTransform;
     PauseManager pauseManager;
+    Animator animator;
 
     [Header("Ajuste")]
     [SerializeField] float eyeHeight = 1f;
@@ -56,6 +57,8 @@ public class EnemyController : MonoBehaviour
         pauseManager = FindAnyObjectByType<PauseManager>();
         if (pauseManager == null)
             Debug.LogWarning("[EnemyController] No se encontró un PauseManager en la escena.");
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -82,7 +85,11 @@ public class EnemyController : MonoBehaviour
         Vector3 direction = target.position - transform.position;
         direction.y = 0f;
 
-        if (direction.magnitude > waypointTolerance)
+        bool isMoving = direction.magnitude > waypointTolerance;
+        if (animator != null)
+            animator.SetBool("isWalking", isMoving);
+
+        if (isMoving)
         {
             transform.position += direction.normalized * moveSpeed * Time.deltaTime;
 
