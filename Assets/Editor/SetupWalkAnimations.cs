@@ -79,12 +79,36 @@ public static class SetupWalkAnimations
             Debug.Log($"Ya existia {controllerPath}, se reutiliza tal cual.");
         }
 
-        Animator animator = root.GetComponent<Animator>();
-        if (animator == null) animator = root.AddComponent<Animator>();
+        GameObject animTarget = FindVisualRoot(root);
+
+        // Limpia un Animator que haya quedado mal puesto en el padre en una corrida anterior.
+        if (animTarget != root)
+        {
+            Animator stray = root.GetComponent<Animator>();
+            if (stray != null) Object.DestroyImmediate(stray);
+        }
+
+        Animator animator = animTarget.GetComponent<Animator>();
+        if (animator == null) animator = animTarget.AddComponent<Animator>();
         animator.runtimeAnimatorController = controller;
         if (avatar != null) animator.avatar = avatar;
         animator.applyRootMotion = false;
 
         EditorUtility.SetDirty(root);
+        EditorUtility.SetDirty(animTarget);
+    }
+
+    // El Animator tiene que vivir en el mismo GameObject que la raiz del esqueleto animado
+    // (el modelo instanciado como hijo), no en el objeto padre que trae el CharacterController/scripts.
+    static GameObject FindVisualRoot(GameObject root)
+    {
+        var skinned = root.GetComponentInChildren<SkinnedMeshRenderer>(true);
+        if (skinned == null) return root;
+
+        Transform t = skinned.transform;
+        while (t.parent != null && t.parent != root.transform)
+            t = t.parent;
+
+        return t.gameObject;
     }
 }

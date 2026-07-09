@@ -91,7 +91,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         action = new InputSystem_Actions();
         characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         states = new PlayerStateFactory(this);
         currentState = states.Grounded();

@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
         if (pauseManager == null)
             Debug.LogWarning("[EnemyController] No se encontró un PauseManager en la escena.");
 
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
