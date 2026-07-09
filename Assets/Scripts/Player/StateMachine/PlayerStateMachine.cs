@@ -31,7 +31,7 @@ public class PlayerStateMachine : MonoBehaviour
     bool isCrouchPressed;
     public bool IsCrouchPressed { get { return isCrouchPressed; } }
 
-    float rotationFactorPerFrame = 10f;
+    [SerializeField] private float rotationSpeed = 540f; // grados por segundo, velocidad constante de giro
 
     [Header("Movimiento")]
     [SerializeField] private float moveSpeed = 4f; // Velocidad única, sin distinción walk/run
@@ -134,7 +134,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (isMovementPressed && positionTolookAt.sqrMagnitude > 0.0001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(positionTolookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 

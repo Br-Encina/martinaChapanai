@@ -15,6 +15,8 @@ public static class SetupWalkAnimations
             "Assets/Animation/Player/AdventurerWomenAnimator.controller",
             paramName: "isRunning");
 
+        if (player != null) AlignDetectionPoint(player);
+
         var enemy = Object.FindFirstObjectByType<EnemyController>();
         SetupCharacter(
             enemy != null ? enemy.gameObject : null,
@@ -34,6 +36,7 @@ public static class SetupWalkAnimations
             return;
         }
 
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
         var subAssets = AssetDatabase.LoadAllAssetsAtPath(modelPath);
         var clips = subAssets.OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToList();
         var avatar = subAssets.OfType<Avatar>().FirstOrDefault();
@@ -79,13 +82,14 @@ public static class SetupWalkAnimations
             Debug.Log($"Ya existia {controllerPath}, se reutiliza tal cual.");
         }
 
-        GameObject animTarget = FindVisualRoot(root);
+        GameObject animTarget = FindInstantiatedChild(root, prefab) ?? root;
 
-        // Limpia un Animator que haya quedado mal puesto en el padre en una corrida anterior.
-        if (animTarget != root)
+        // Limpia cualquier Animator que haya quedado mal puesto en una corrida anterior
+        // (por ejemplo en un hueso de la malla vieja de Ch09, o en el padre).
+        foreach (var stray in root.GetComponentsInChildren<Animator>(true))
         {
-            Animator stray = root.GetComponent<Animator>();
-            if (stray != null) Object.DestroyImmediate(stray);
+            if (stray.gameObject != animTarget)
+                Object.DestroyImmediate(stray);
         }
 
         Animator animator = animTarget.GetComponent<Animator>();
@@ -98,17 +102,52 @@ public static class SetupWalkAnimations
         EditorUtility.SetDirty(animTarget);
     }
 
-    // El Animator tiene que vivir en el mismo GameObject que la raiz del esqueleto animado
-    // (el modelo instanciado como hijo), no en el objeto padre que trae el CharacterController/scripts.
-    static GameObject FindVisualRoot(GameObject root)
+    // El punto rojo (gizmo de deteccion que usa el Enemy para la linea de vision) estaba
+    // calibrado para la altura de Ch09_nonPBR. Lo recalculamos segun la altura real del
+    // modelo Adventurer women que quedo puesto ahora.
+    static void AlignDetectionPoint(PlayerStateMachine player)
     {
-        var skinned = root.GetComponentInChildren<SkinnedMeshRenderer>(true);
-        if (skinned == null) return root;
+        var renderer = player.GetComponentInChildren<SkinnedMeshRenderer>(true);
+        if (renderer == null)
+        {
+            Debug.LogWarning("No se encontro un SkinnedMeshRenderer en el Player para recalibrar el punto de deteccion.");
+            return;
+        }
 
-        Transform t = skinned.transform;
-        while (t.parent != null && t.parent != root.transform)
-            t = t.parent;
+        float feetY = player.transform.position.y;
+        float topY = renderer.bounds.max.y;
+        float height = topY - feetY;
 
-        return t.gameObject;
+        if (height <= 0.01f)
+        {
+            Debug.LogWarning($"Altura calculada invalida ({height:F3}) para el Player, no se ajusta el punto de deteccion.");
+            return;
+        }
+
+        float standing = height * 0.85f;
+        float crouching = height * 0.35f;
+
+        var so = new SerializedObject(player);
+        so.FindProperty("standingDetectionHeight").floatValue = standing;
+        so.FindProperty("crouchingDetectionHeight").floatValue = crouching;
+        so.ApplyModifiedProperties();
+
+        Debug.Log($"Punto de deteccion recalibrado: standing={standing:F2}, crouching={crouching:F2} (altura del modelo: {height:F2}).");
+    }
+
+    // Busca, entre los hijos directos de root, el que fue instanciado especificamente
+    // a partir de "prefab" (comparando contra el asset de origen, no por nombre) -
+    // asi evitamos agarrar por error una malla vieja que haya quedado de otro modelo.
+    static GameObject FindInstantiatedChild(GameObject root, GameObject prefab)
+    {
+        if (prefab == null) return null;
+
+        foreach (Transform child in root.transform)
+        {
+            var source = PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject);
+            if (source == prefab)
+                return child.gameObject;
+        }
+        return null;
     }
 }

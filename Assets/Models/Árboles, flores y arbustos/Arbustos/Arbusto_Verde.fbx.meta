@@ -3,7 +3,12 @@ guid: ef33be77efcb9d4488bf0652fe78bb39
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Verde claro_
+    second: {fileID: 2100000, guid: c380d555965e5454995a0dd472f3c69c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
