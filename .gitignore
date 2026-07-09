@@ -8,6 +8,16 @@
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
+
+# Assets de Kenney descartados durante la curaduria (ver carpetas "no usados")
+Assets/Models/Models/*/no usados/
+Assets/Models/Models/*/no usados.meta
+
+# Variantes del pack de Kenney que no se usan en el juego (sprites isometricos y de perfil)
+Assets/Models/Isometric/
+Assets/Models/Isometric.meta
+Assets/Models/Side/
+Assets/Models/Side.meta
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 .utmp/
