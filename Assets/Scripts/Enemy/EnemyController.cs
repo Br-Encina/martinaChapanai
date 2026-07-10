@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 // Requiere que el Player tenga el tag "Player" asignado en Unity.
 // Los waypoints son GameObjects vacíos que creás en la escena y arrastrás al array desde el Inspector.
@@ -46,8 +47,12 @@ public class EnemyController : MonoBehaviour
     public float DetectionAngle { get { return detectionAngle; } }
     public float EyeHeight { get { return eyeHeight; } }
 
+    bool canDetect = true;
+
     private void Start()
     {
+
+        StartCoroutine(HabilitarDeteccion());
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             playerTransform = player.transform;
@@ -73,6 +78,12 @@ public class EnemyController : MonoBehaviour
             case EnemyState.PlayerDetected:
                 break;
         }
+    }
+
+    IEnumerator HabilitarDeteccion()
+    {
+        yield return new WaitForSeconds(1f);
+        canDetect = true;
     }
 
     void Patrol()
@@ -107,6 +118,8 @@ public class EnemyController : MonoBehaviour
 
     void DetectPlayer()
     {
+
+        if (!canDetect) return;
         if (playerTransform == null) return;
 
         Vector3 eyePosition = transform.position + Vector3.up * eyeHeight;
