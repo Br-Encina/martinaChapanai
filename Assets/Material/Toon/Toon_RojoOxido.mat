@@ -13,6 +13,8 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
+  - _IS_CLIPPING_OFF
+  - _IS_OUTLINE_CLIPPING_NO
   - _OUTLINE_NML
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -20,6 +22,7 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
+    IgnoreProjection: False
     RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -32,5 +35,6 @@ Material:
     - _1st_ShadeColor: {r: 0.2675, g: 0.0992, b: 0.0625, a: 1}
     - _2nd_ShadeColor: {r: 0.2675, g: 0.0992, b: 0.0625, a: 1}
     - _BaseColor: {r: 0.4863, g: 0.1804, b: 0.1137, a: 1}
+    - _Color: {r: 0.4863, g: 0.18039995, b: 0.11369998, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
